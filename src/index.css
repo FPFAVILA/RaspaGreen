@@ -1,0 +1,885 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Otimizações para mobile e performance */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #0E1015;
+    color: #ffffff;
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+  
+  /* Safe area para dispositivos com notch */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Prevenir zoom em inputs no iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"] {
+    font-size: 16px;
+  }
+  
+  /* Melhorar performance de animações */
+  .animate-bounce,
+  .animate-pulse,
+  .animate-ping,
+  .animate-spin {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  
+  /* Grid pattern otimizado */
+  .bg-grid-white\/\[0\.02\] {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* Animações customizadas premium */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+@keyframes confettiDrop {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes celebrationPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.animate-sparkle-rotate {
+  animation: sparkle-rotate 2s ease-in-out infinite;
+}
+
+@keyframes prizeGlow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(1, 211, 117, 0.6), 0 0 60px rgba(1, 211, 117, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(1, 211, 117, 0.9), 0 0 100px rgba(1, 211, 117, 0.5);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-in {
+  animation: animate-in 0.3s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 0.4s ease-out;
+}
+
+.animate-slide-out-right {
+  animation: slideOutToRight 0.3s ease-in;
+}
+
+.zoom-in-95 {
+  animation: animate-in 0.3s ease-out;
+}
+
+.slideInDown {
+  animation: slideInDown 0.5s ease-out;
+}
+
+.slideOutUp {
+  animation: slideOutUp 0.3s ease-in;
+}
+
+.animate-confetti-drop {
+  animation: confettiDrop 3s linear infinite;
+}
+
+.animate-celebration-pulse {
+  animation: celebrationPulse 2s ease-in-out infinite;
+}
+
+.animate-prize-glow {
+  animation: prizeGlow 2s ease-in-out infinite;
+}
+
+.animate-float-up {
+  animation: floatUp 0.6s ease-out;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Animações elegantes e profissionais */
+@keyframes confettiElegant {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes celebrationBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(1, 211, 117, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(1, 211, 117, 0.5);
+  }
+}
+
+@keyframes starElegant {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes elegantPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes professionalGlow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(1, 211, 117, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(1, 211, 117, 0.7);
+  }
+}
+
+@keyframes prizeEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(1, 211, 117, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 35px rgba(255, 255, 255, 1), 0 0 70px rgba(1, 211, 117, 0.8);
+  }
+}
+
+@keyframes certificateSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes productFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes valuePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(1, 211, 117, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(1, 211, 117, 0.6);
+  }
+}
+
+@keyframes urgencySubtle {
+  0%, 100% {
+    border-color: rgba(248, 113, 113, 0.3);
+  }
+  50% {
+    border-color: rgba(248, 113, 113, 0.5);
+  }
+}
+
+/* Classes de animação */
+.animate-confetti-elegant {
+  animation: confettiElegant 2.5s linear infinite;
+}
+
+.animate-celebration-bounce {
+  animation: celebrationBounce 2s ease-in-out infinite;
+}
+
+.animate-text-glow {
+  animation: textGlow 2s ease-in-out infinite;
+}
+
+.animate-star-elegant {
+  animation: starElegant 2s ease-in-out infinite;
+}
+
+.animate-prize-entrance {
+  animation: prizeEntrance 0.8s ease-out;
+}
+
+.animate-title-glow {
+  animation: titleGlow 2s ease-in-out infinite;
+}
+
+.animate-certificate-slide {
+  animation: certificateSlide 0.6s ease-out;
+}
+
+.animate-product-float {
+  animation: productFloat 3s ease-in-out infinite;
+}
+
+.animate-value-pulse {
+  animation: valuePulse 2s ease-in-out infinite;
+}
+
+.animate-star-twinkle {
+  animation: starElegant 2s ease-in-out infinite;
+}
+
+.animate-urgency-subtle {
+  animation: urgencySubtle 2s ease-in-out infinite;
+}
+
+/* Animações para barra de chance */
+@keyframes fillBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--target-width, 50%);
+  }
+}
+
+@keyframes slideIndicator {
+  from {
+    left: 0%;
+    opacity: 0;
+  }
+  to {
+    left: var(--target-left, 50%);
+    opacity: 1;
+  }
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(1, 211, 117, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(1, 211, 117, 0.6);
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.01);
+  }
+}
+
+@keyframes fillBarSmooth {
+  0% {
+    width: 0%;
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    width: var(--target-width, 50%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIndicatorSmooth {
+  0% {
+    left: 0%;
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: var(--target-left, 50%);
+    opacity: 1;
+  }
+}
+
+/* Animação de preenchimento da barra personalizada */
+.animate-fill-bar {
+  animation: fillBar 2s ease-out forwards;
+}
+
+.animate-slide-indicator {
+  animation: slideIndicator 2s ease-out forwards;
+}
+
+.animate-slide-indicator-smooth {
+  animation: slideIndicatorSmooth 2.5s ease-out forwards;
+}
+
+.animate-subtle-glow {
+  animation: subtleGlow 2s ease-in-out infinite;
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 2s ease-in-out infinite;
+}
+
+.animate-fill-bar-smooth {
+  animation: fillBarSmooth 1.8s ease-out forwards;
+}
+/* Efeitos visuais premium */
+.shadow-glow {
+  box-shadow: 0 0 20px currentColor;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(1, 211, 117, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(1, 211, 117, 0.8);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Otimizações para touch e interações */
+button, 
+.cursor-pointer,
+[role="button"] {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* Melhorar scrolling no mobile */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Scroll otimizado para mobile */
+.touch-pan-y {
+  touch-action: pan-y;
+}
+
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
+
+/* Prevenir scroll conflitante em containers aninhados */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
+/* Melhorar área de toque para scroll */
+.scroll-area {
+  min-height: 44px; /* Área mínima de toque iOS */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Prevenir seleção de texto em elementos interativos */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Bloqueio de touch durante animações */
+.touch-none {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+/* Backdrop blur otimizado */
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.backdrop-blur-2xl {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+/* Cores sólidas modernas */
+.bg-primary {
+  background-color: #0E1015;
+}
+
+.bg-accent {
+  background-color: #01D375;
+}
+
+.bg-accent-hover {
+  background-color: #00B865;
+}
+
+.bg-accent-light {
+  background-color: rgba(1, 211, 117, 0.1);
+}
+
+.text-accent {
+  color: #01D375;
+}
+
+.text-accent-hover {
+  color: #00B865;
+}
+
+.border-accent {
+  border-color: #01D375;
+}
+
+/* Sombras modernas */
+.shadow-modern {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-glow-modern {
+  box-shadow: 0 0 20px rgba(1, 211, 117, 0.3);
+}
+
+/* Efeitos de hover modernos */
+.hover-lift {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px rgba(1, 211, 117, 0.3);
+}
+
+/* Scrollbar customizada moderna */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(1, 211, 117, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(1, 211, 117, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(1, 211, 117, 0.5);
+}
+
+/* Scroll suave global */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Otimizações para scroll em mobile */
+.scroll-smooth {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-top: 80px;
+}
+
+/* Scrollbar customizada para seção de prêmios */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-white\/20::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Scroll automático para seções específicas */
+#pix-code-section {
+  scroll-margin-top: 20px;
+  scroll-margin-bottom: 20px;
+}
+
+/* Melhorar scroll em containers com overflow */
+.overflow-y-auto {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Efeitos de destaque para elementos importantes */
+.highlight-pulse {
+  animation: highlightPulse 2s ease-in-out infinite;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(1, 211, 117, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(1, 211, 117, 0);
+  }
+}
+
+/* Animação para campos com erro */
+.error-highlight {
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Efeito de foco melhorado */
+.focus-ring {
+  transition: all 0.3s ease;
+}
+
+.focus-ring:focus {
+  ring: 4px;
+  ring-color: rgba(1, 211, 117, 0.5);
+  ring-offset: 2px;
+}
+
+/* Otimizações para dispositivos de alta densidade */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce,
+  .animate-pulse,
+  .animate-ping,
+  .animate-spin {
+    animation: none;
+  }
+}
+
+/* Focus states melhorados */
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #01D375;
+  outline-offset: 2px;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animações para tela de vitória */
+@keyframes firework {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.4s ease-out;
+}
+
+.animate-slide-in-down {
+  animation: slide-in-down 0.5s ease-out;
+}
