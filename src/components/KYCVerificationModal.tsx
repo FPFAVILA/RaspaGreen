@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Shield, CheckCircle, AlertCircle, Lock } from 'lucide-react';
+import { X, Shield, CheckCircle, AlertCircle, Lock, Copy } from 'lucide-react';
 import { KYCStatus } from '../types';
 import { useFictionalPix } from '../hooks/useFictionalPix';
 import { QRCodeGenerator } from './QRCodeGenerator';
@@ -9,7 +9,6 @@ interface KYCVerificationModalProps {
   onClose: () => void;
   kycStatus: KYCStatus;
   onUpdateKYC: (status: KYCStatus) => void;
-  onAddBalance: (amount: number) => void;
 }
 
 type KYCStep = 'intro' | 'pix-payment' | 'processing' | 'error' | 'success';
@@ -18,15 +17,14 @@ export const KYCVerificationModal: React.FC<KYCVerificationModalProps> = ({
   isOpen,
   onClose,
   kycStatus,
-  onUpdateKYC,
-  onAddBalance
+  onUpdateKYC
 }) => {
   const [currentStep, setCurrentStep] = useState<KYCStep>('intro');
   const [attemptCount, setAttemptCount] = useState(0);
   const [copied, setCopied] = useState(false);
   const [paymentCheckInterval, setPaymentCheckInterval] = useState<NodeJS.Timeout | null>(null);
 
-  const { loading, error, pixData, createPix, checkPixStatus, reset } = useFictionalPix();
+  const { loading, pixData, createPix, checkPixStatus, reset } = useFictionalPix();
 
   const KYC_AMOUNT = 4.90;
 
@@ -60,7 +58,6 @@ export const KYCVerificationModal: React.FC<KYCVerificationModalProps> = ({
             setPaymentCheckInterval(null);
           }
 
-          onAddBalance(status.value);
           setCurrentStep('processing');
 
           setTimeout(() => {
@@ -94,7 +91,7 @@ export const KYCVerificationModal: React.FC<KYCVerificationModalProps> = ({
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [pixData, isOpen, currentStep, attemptCount]);
+  }, [pixData, isOpen, currentStep, attemptCount, paymentCheckInterval]);
 
   const handleStartVerification = async () => {
     try {
@@ -269,23 +266,25 @@ export const KYCVerificationModal: React.FC<KYCVerificationModalProps> = ({
                 <label className="block text-gray-400 font-semibold mb-2 text-xs">
                   Codigo Copia e Cola
                 </label>
-                <input
-                  type="text"
-                  value={pixData.qrcode}
-                  readOnly
-                  className="w-full px-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-xs font-mono mb-3 text-gray-300 focus:outline-none"
-                  onClick={(e) => (e.target as HTMLInputElement).select()}
-                />
-                <button
-                  onClick={copyPixCode}
-                  className={`w-full py-3 rounded-lg font-bold transition-all duration-300 ${
-                    copied
-                      ? 'bg-accent text-white'
-                      : 'bg-blue-600 text-white hover:bg-blue-700'
-                  }`}
-                >
-                  {copied ? 'Codigo Copiado!' : 'Copiar Codigo PIX'}
-                </button>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={pixData.qrcode}
+                    readOnly
+                    className="flex-1 px-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-xs font-mono text-gray-300 focus:outline-none"
+                    onClick={(e) => (e.target as HTMLInputElement).select()}
+                  />
+                  <button
+                    onClick={copyPixCode}
+                    className={`px-4 py-3 rounded-lg font-bold transition-all duration-300 flex items-center gap-2 ${
+                      copied
+                        ? 'bg-accent text-white'
+                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                    }`}
+                  >
+                    <Copy className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
               <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-3">
