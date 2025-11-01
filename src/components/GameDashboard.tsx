@@ -162,11 +162,6 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({ user }) => {
     updateKYCStatus(kycStatus);
   };
 
-  const handleOpenDepositFromKYC = () => {
-    setShowKYCModal(false);
-    setShowAddBalanceModal(true);
-  };
-
 
   // Se está jogando, mostrar raspadinha
   if (currentCard) {
@@ -392,7 +387,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({ user }) => {
         onClose={() => setShowKYCModal(false)}
         kycStatus={gameState.kycStatus || { isVerified: false, identityVerified: false, depositVerified: false }}
         onUpdateKYC={handleUpdateKYC}
-        onOpenDepositModal={handleOpenDepositFromKYC}
+        onAddBalance={addBalance}
       />
       {/* Notificações Sociais */}
       <SocialProofNotifications />
